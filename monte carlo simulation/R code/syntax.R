@@ -34,7 +34,7 @@ min_students <- c(5, 10, 15, 20, 30) # Min i/j
 max_students <- c(10, 15, 20, 25, 30, 40, 50) # Max i/j
 
 # Create progress bar for simulation based on all conditions + replications
-n_unique_sim_cells = sum(table(count(sims)))*sum(table(count(n_schools)))*
+n_unique_sim_cells <- sum(table(count(sims)))*sum(table(count(n_schools)))*
 sum(table(count(rho)))*sum(table(count(effect_sizes)))*
 sum(table(count(min_students)))*sum(table(count(max_students)))
 
@@ -49,7 +49,7 @@ opts <- list(progress = progress)
 #----------------------------------------------------------------------------------------------#
 # Step 2: Generate data, estimate treatment effect, calculate power
 #----------------------------------------------------------------------------------------------#
-simulate_function = 
+simulate_function <-  
 foreach(i=sims, .combine=rbind) %:%
 foreach(j=n_schools, .combine=rbind) %:%  
 foreach(icc=rho, .combine=rbind) %:%  
@@ -108,7 +108,7 @@ aa_power <- 1 - pt(qt(1-.05/2, df=j-0-2), df=j-0-2, aa_lambda)
 
 
 # Calculate power using harmonic mean i/j
-harm_avg_iperj = round( j / (((j/2)/min_ij) + ((j/2)/max_ij)) , digits=2)
+harm_avg_iperj <- round( j / (((j/2)/min_ij) + ((j/2)/max_ij)) , digits=2)
 
 hm_lambda <- beta * sqrt(prob_treat * (1-prob_treat) *j) / 
   sqrt(icc * (1-0) + (1-icc) * (1-0) / harm_avg_iperj)
